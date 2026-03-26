@@ -1,0 +1,112 @@
+{
+  "$description": "INDEPENDENT RESEARCH PROPOSAL — not an official, endorsed, or merged Ant Design contribution. Authored by Olena Vynohradova as the §4.5 token-augmentation component of the 'Design Token Evolution and Accessibility Drift' study (see plans/design-token-evolution-research-plan.md §4.5, §8). Adds the two accessibility-token categories missing from Ant Design v5's shipped Alias Token layer as of tag 5.0.0 (contrast-safe color pairs and minimum target-size tokens; focus-ring tokens already exist as controlOutlineWidth/controlOutline/controlTmpOutline and are out of scope here). Written in W3C Design Tokens Community Group (DTCG) format (https://tr.designtokens.org/format/, Editor's Draft) as a portable proposal document — this file's own DTCG-compliance does not retroactively make Ant Design's shipped Less/TypeScript token source DTCG-compliant. Token names follow Ant Design's real camelCase AliasToken convention exactly (e.g. colorPrimary, colorBgContainer, controlHeight, controlOutlineWidth) so each token reads as a natural extension of components/theme/interface.ts. Color values are not invented: each mirrors an existing Ant Design v5 Seed or derived Map/Alias token value, taken from data/repos/ant-design/after/components/theme/themes/{seed.ts,default/colors.ts,default/colorAlgorithm.ts} at tag 5.0.0, and every contrast ratio stated below was computed with the WCAG 2.x relative-luminance/contrast formula (see companion .md for the worked math), not estimated.",
+  "$extensions": {
+    "org.zenodo.researchProposal": {
+      "study": "Design Token Evolution and Accessibility Drift Across Major Open-Source Design Systems",
+      "author": "Olena Vynohradova",
+      "targetSystem": "Ant Design",
+      "targetRepo": "ant-design/ant-design",
+      "auditedAfterTag": "5.0.0",
+      "sourceTokenFiles": [
+        "components/theme/interface.ts",
+        "components/theme/themes/seed.ts",
+        "components/theme/themes/default/colors.ts",
+        "components/theme/themes/default/colorAlgorithm.ts",
+        "components/theme/themes/shared/genControlHeight.ts",
+        "components/theme/themes/shared/genSizeMapToken.ts"
+      ],
+      "status": "independent-research-proposal-not-merged-not-endorsed",
+      "planReference": "design-token-evolution-research-plan.md §4.5, §8"
+    }
+  },
+  "contrast": {
+    "$description": "Contrast-safe color pairs (Alias Token layer). Each pair documents a foreground value used against a specific existing Ant Design surface token, and the WCAG 2.2 success criterion + exact computed contrast ratio it satisfies. Foreground values are the real composited-on-white/on-#F5F5F5 solid equivalents of Ant's existing rgba() text tokens (colorText, colorTextSecondary) and the raw seed hex values (colorPrimary, colorError); background values are Ant's existing colorBgContainer (#FFFFFF) and colorBgLayout (#F5F5F5) Map tokens. None of these are new colors — they document ratios for pairings AliasToken already implies but never asserts a number for.",
+    "colorTextOnBgContainer": {
+      "$type": "color",
+      "$value": "#1F1F1F",
+      "$description": "Normal-body-text pair: colorText (Ant's existing rgba(0,0,0,0.88) Map token, composited on white ≈ #1F1F1F) on colorBgContainer (#FFFFFF). Computed contrast 16.48:1 — satisfies WCAG 2.2 SC 1.4.3 (Contrast Minimum, 4.5:1 for normal text) with wide margin. Use for default body/label text placed directly on card, table, and input surfaces.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.mirrorsExistingTokens": ["colorText", "colorBgContainer"],
+        "com.ant-design.wcagSuccessCriterion": "1.4.3",
+        "com.ant-design.computedContrastRatio": "16.48:1",
+        "com.ant-design.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "colorTextSecondaryOnBgContainer": {
+      "$type": "color",
+      "$value": "#595959",
+      "$description": "Secondary text pair: colorTextSecondary (Ant's existing rgba(0,0,0,0.65) Map token, composited on white ≈ #595959) on colorBgContainer (#FFFFFF). Computed contrast 7.01:1 — satisfies WCAG 2.2 SC 1.4.3 (4.5:1 for normal text). Use for helper text, secondary labels, and form field descriptions that must remain readable, not just decorative.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.mirrorsExistingTokens": ["colorTextSecondary", "colorBgContainer"],
+        "com.ant-design.wcagSuccessCriterion": "1.4.3",
+        "com.ant-design.computedContrastRatio": "7.01:1",
+        "com.ant-design.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "colorTextOnBgLayout": {
+      "$type": "color",
+      "$value": "#1F1F1F",
+      "$description": "Normal-body-text pair for the page-background surface: colorText (≈ #1F1F1F composited) on colorBgLayout, Ant's existing page/layout background Map token (#F5F5F5, derived as darken(colorBgBase, 4%)). Computed contrast 15.12:1 — satisfies WCAG 2.2 SC 1.4.3 (4.5:1). Verified separately from colorTextOnBgContainer because colorBgLayout is a distinct, slightly darker surface than colorBgContainer and a pair verified on one surface is not automatically verified on the other.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.mirrorsExistingTokens": ["colorText", "colorBgLayout"],
+        "com.ant-design.wcagSuccessCriterion": "1.4.3",
+        "com.ant-design.computedContrastRatio": "15.12:1",
+        "com.ant-design.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "colorPrimaryOnBgContainer": {
+      "$type": "color",
+      "$value": "#1677FF",
+      "$description": "Non-text UI-component pair: colorPrimary, Ant's existing Seed token (#1677FF, unchanged), on colorBgContainer (#FFFFFF), for graphical objects required to identify a component or its state — active/focused control borders, primary icon glyphs, selected-state indicators — where the shape/boundary itself (not text) carries meaning. Computed contrast 4.10:1 — satisfies WCAG 2.2 SC 1.4.11 (Non-text Contrast, 3:1 minimum). Not intended as a normal-text pairing token; colorPrimaryText (existing Map token) already exists for that use case.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.mirrorsExistingTokens": ["colorPrimary", "colorBgContainer"],
+        "com.ant-design.wcagSuccessCriterion": "1.4.11",
+        "com.ant-design.computedContrastRatio": "4.10:1",
+        "com.ant-design.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "colorErrorOnBgContainer": {
+      "$type": "color",
+      "$value": "#F5222D",
+      "$description": "Non-text UI-component pair only: colorError, Ant's existing Seed token (#F5222D, unchanged), on colorBgContainer (#FFFFFF), for error-state icons and invalid-field borders. Computed contrast 4.08:1 — satisfies WCAG 2.2 SC 1.4.11 (3:1 minimum for non-text) but falls short of SC 1.4.3's 4.5:1 floor for normal text. Do not use this token for small error-message text — Ant's existing colorErrorText Map token (a darker shade from the generated error palette) is the correct pairing for text and was excluded here because its exact hex depends on the @ant-design/colors palette-generation algorithm rather than a raw seed value.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.mirrorsExistingTokens": ["colorError", "colorBgContainer"],
+        "com.ant-design.wcagSuccessCriterion": "1.4.11",
+        "com.ant-design.computedContrastRatio": "4.08:1",
+        "com.ant-design.status": "independent-research-proposal-not-merged",
+        "com.ant-design.usageWarning": "non-text only; 4.08:1 does not clear the 4.5:1 SC 1.4.3 floor for normal text"
+      }
+    }
+  },
+  "target-size": {
+    "$description": "Minimum interactive target-size tokens (Alias Token layer), named after Ant's existing control* pattern (controlHeight, controlHeightSM, controlOutlineWidth, controlInteractiveSize). Addresses WCAG 2.2 SC 2.5.8 (Target Size Minimum, Level AA — 24x24 CSS px minimum for the operable area of any pointer input target, with an exception if an equivalent target is available or the target is inline text).",
+    "controlMinTargetSize": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Minimum clickable/tappable area, in CSS px, for any standalone interactive control (icon-only buttons, Tag/Select 'remove' icons, pagination items, Checkbox/Radio hit area) — satisfies WCAG 2.2 SC 2.5.8 (24x24 CSS px minimum, Level AA) exactly at the floor. Deliberately set equal to Ant's existing controlHeightSM (32 * 0.75 = 24px, see genControlHeight.ts), which already happens to sit exactly on the SC 2.5.8 minimum. Ant's existing controlHeightXS (32 * 0.5 = 16px, documented in interface.ts as '@private, only used for control inside component like Multiple Select inner selection item') is below this floor and must not be used as a standalone target's full hit area without the inset compensation below.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.relatedExistingTokens": ["controlHeight", "controlHeightSM", "controlHeightXS"],
+        "com.ant-design.wcagSuccessCriterion": "2.5.8",
+        "com.ant-design.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "controlMinTargetInset": {
+      "$type": "dimension",
+      "$value": "4px",
+      "$description": "Minimum invisible hit-area padding to add on each side of a visually smaller-than-24px control (e.g. a 16px controlHeightXS icon glyph, or any icon sized to fontSizeIcon) so its total operable area reaches controlMinTargetSize (24px), per WCAG 2.2 SC 2.5.8's allowance for meeting the minimum via an expanded/invisible hit area rather than resizing the visible glyph itself. Computed as (controlMinTargetSize - controlHeightXS) / 2 = (24 - 16) / 2 = 4px, which is not an arbitrary number — it exactly equals Ant's existing sizeXXS primitive (sizeUnit * (sizeStep - 3) = 4, see genSizeMapToken.ts), so implementers can express this inset with a token that already ships in MapToken.",
+      "$extensions": {
+        "com.ant-design.tokenLayer": "alias",
+        "com.ant-design.mirrorsExistingTokens": ["sizeXXS"],
+        "com.ant-design.relatedExistingTokens": ["controlHeightXS"],
+        "com.ant-design.wcagSuccessCriterion": "2.5.8",
+        "com.ant-design.status": "independent-research-proposal-not-merged"
+      }
+    }
+  }
+}

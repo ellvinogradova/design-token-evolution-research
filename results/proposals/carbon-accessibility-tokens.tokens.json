@@ -1,0 +1,124 @@
+{
+  "$description": "INDEPENDENT RESEARCH PROPOSAL — not an official, endorsed, or merged IBM Carbon Design System contribution. Authored by Olena Vynohradova as the §4.5 token-augmentation component of the 'Design Token Evolution and Accessibility Drift' study (see plans/design-token-evolution-research-plan.md §4.5, §8). Adds the two accessibility-token categories missing from Carbon v11's shipped global theme tokens as of tag v11.0.0 (contrast-safe color pairs and minimum target-size tokens; focus-ring tokens already exist as focus/focusInset/focusInverse and are out of scope here). Written in W3C Design Tokens Community Group (DTCG) format (https://tr.designtokens.org/format/, Editor's Draft) as a portable proposal document — this file's own DTCG-compliance does not retroactively make Carbon's shipped JavaScript token source (packages/themes/src/*.js) DTCG-compliant. Token names use camelCase and follow Carbon's real naming pattern exactly (e.g. textPrimary, backgroundBrand, layer01, sizeXSmall) so each token reads as a natural extension of packages/themes/src/white.js and packages/layout/src/index.js. Color values are not invented: every hex below is the real, unmodified value Carbon's own white.js theme references symbolically (textPrimary = gray100, background = white, etc.), resolved against @carbon/colors@11.0.0 and @carbon/layout@11.0.0 — the exact dependency versions @carbon/themes@11.0.0 itself pins (published 2022-03-31, same day as the v11.0.0 tag). Those two color/layout primitive packages are not vendored in this study's sparse per-package checkout of data/repos/carbon/after (only packages/themes, packages/layout, and packages/type were extracted), so the raw hex/rem values were resolved by fetching the real published npm packages directly rather than guessed; see the companion .md, §2, for the full resolution chain and shasums. Every contrast ratio stated below was computed with the WCAG 2.x relative-luminance/contrast formula (see companion .md for the worked math), not estimated.",
+  "$extensions": {
+    "org.zenodo.researchProposal": {
+      "study": "Design Token Evolution and Accessibility Drift Across Major Open-Source Design Systems",
+      "author": "Olena Vynohradova",
+      "targetSystem": "IBM Carbon Design System",
+      "targetRepo": "carbon-design-system/carbon",
+      "auditedAfterTag": "v11.0.0",
+      "sourceTokenFiles": [
+        "packages/themes/src/white.js",
+        "packages/themes/src/g10.js",
+        "packages/layout/src/tokens.js",
+        "packages/layout/src/index.js (resolved from @carbon/layout@11.0.0, not vendored in the sparse checkout)",
+        "@carbon/colors@11.0.0 lib/index.js (resolved from npm, not vendored in the sparse checkout)"
+      ],
+      "status": "independent-research-proposal-not-merged-not-endorsed",
+      "planReference": "design-token-evolution-research-plan.md §4.5, §8"
+    }
+  },
+  "contrast": {
+    "$description": "Contrast-safe color pairs for Carbon v11's global `white` theme. Each pair documents an existing Carbon semantic color token used against a specific existing Carbon surface token, and the WCAG 2.2 success criterion + exact computed contrast ratio it satisfies. None of these are new colors — every $value below is Carbon's own existing textPrimary/textSecondary/textOnColor/focus/borderStrong01/background/layer01/backgroundBrand hex, taken unmodified from packages/themes/src/white.js (symbolic refs) resolved against @carbon/colors@11.0.0 (concrete hex). This group documents ratios for pairings Carbon's layer/text/focus token families already imply through naming (e.g. 'textOnColor' clearly means 'text meant to sit on a colored/brand surface') but never assert a number for anywhere in the shipped source.",
+    "textPrimaryOnBackground": {
+      "$type": "color",
+      "$value": "#161616",
+      "$description": "Normal-body-text pair: textPrimary (Carbon's existing gray100 token, white.js:141) on background (Carbon's existing white token, white.js:47). Computed contrast 18.10:1 — satisfies WCAG 2.2 SC 1.4.3 (Contrast Minimum, 4.5:1 for normal text) with a 4x margin. Use for default body text, headings, and form labels placed directly on the page background.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "text",
+        "com.carbon-design-system.mirrorsExistingTokens": ["textPrimary", "background"],
+        "com.carbon-design-system.wcagSuccessCriterion": "1.4.3",
+        "com.carbon-design-system.computedContrastRatio": "18.10:1",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "textSecondaryOnBackground": {
+      "$type": "color",
+      "$value": "#525252",
+      "$description": "Secondary text pair: textSecondary (Carbon's existing gray70 token, white.js:142) on background (white, white.js:47). Computed contrast 7.81:1 — satisfies WCAG 2.2 SC 1.4.3 (4.5:1 for normal text). Use for helper text, secondary labels, and metadata that must stay readable, not merely decorative.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "text",
+        "com.carbon-design-system.mirrorsExistingTokens": ["textSecondary", "background"],
+        "com.carbon-design-system.wcagSuccessCriterion": "1.4.3",
+        "com.carbon-design-system.computedContrastRatio": "7.81:1",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "textPrimaryOnLayer01": {
+      "$type": "color",
+      "$value": "#161616",
+      "$description": "Normal-body-text pair verified on Carbon's alternate first-layer surface: textPrimary (gray100) on layer01 (Carbon's existing gray10 token, white.js:58), the surface Carbon uses for cards/tiles/panels sitting one level above the page background in its layer-token model. Computed contrast 16.45:1 — satisfies WCAG 2.2 SC 1.4.3 (4.5:1). Verified separately from textPrimaryOnBackground because Carbon's layer model (layer01/02/03, each with its own hover/active/selected variants) is a distinguishing architectural feature of this system — a pair verified against `background` is not automatically verified against `layer01`, and Carbon's shipped tokens never assert that it is.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "text",
+        "com.carbon-design-system.mirrorsExistingTokens": ["textPrimary", "layer01"],
+        "com.carbon-design-system.wcagSuccessCriterion": "1.4.3",
+        "com.carbon-design-system.computedContrastRatio": "16.45:1",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "textOnColorOnBackgroundBrand": {
+      "$type": "color",
+      "$value": "#ffffff",
+      "$description": "Normal-text pair for brand-colored surfaces: textOnColor (Carbon's existing white token, white.js:147, documented by its own name as 'text meant to sit on a colored background') on backgroundBrand (Carbon's existing blue60 token, white.js:49) — the pairing used by Button-primary-style brand surfaces. Computed contrast 5.00:1 — satisfies WCAG 2.2 SC 1.4.3 (4.5:1) but only just; this is a real, tight margin worth flagging rather than a comfortable one, and it is why this pairing is asserted explicitly instead of left implicit.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "text",
+        "com.carbon-design-system.mirrorsExistingTokens": ["textOnColor", "backgroundBrand"],
+        "com.carbon-design-system.wcagSuccessCriterion": "1.4.3",
+        "com.carbon-design-system.computedContrastRatio": "5.00:1",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged",
+        "com.carbon-design-system.usageWarning": "5.00:1 clears the 4.5:1 SC 1.4.3 floor but with under 0.5 points of margin; do not further darken backgroundBrand or lighten textOnColor without recomputing"
+      }
+    },
+    "focusOnBackground": {
+      "$type": "color",
+      "$value": "#0f62fe",
+      "$description": "Non-text UI-component pair: focus (Carbon's existing blue60 focus-ring token, white.js:182) against background (white, white.js:47) — the actual focus-indicator-to-page-background pairing every focusable element on a white surface relies on. Computed contrast 5.00:1 — satisfies WCAG 2.2 SC 1.4.11 (Non-text Contrast, 3:1 minimum) with margin to spare. Carbon already ships the `focus` token itself (that is why this study's focus-ring rubric point was already awarded), but nothing in the shipped theme source asserts that `focus` is actually contrast-safe against `background` — this token closes exactly that documentation gap, not the existence gap.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "focus",
+        "com.carbon-design-system.mirrorsExistingTokens": ["focus", "background"],
+        "com.carbon-design-system.wcagSuccessCriterion": "1.4.11",
+        "com.carbon-design-system.computedContrastRatio": "5.00:1",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged",
+        "com.carbon-design-system.note": "Same underlying color pair (blue60/white) as textOnColorOnBackgroundBrand, documented separately because it satisfies a different SC (1.4.11, non-text) for a different reason (focus-ring visibility, not text legibility)"
+      }
+    },
+    "borderStrongOnBackground": {
+      "$type": "color",
+      "$value": "#8d8d8d",
+      "$description": "Non-text UI-component pair only: borderStrong01 (Carbon's existing gray50 token, white.js:127) against background (white, white.js:47), for higher-emphasis borders around form controls, dividers, and structural boundaries. Computed contrast 3.32:1 — satisfies WCAG 2.2 SC 1.4.11 (3:1 minimum for non-text) but falls well short of SC 1.4.3's 4.5:1 floor. This is the tightest margin in this proposal and is flagged accordingly: do not reuse borderStrong01 as a text color, and do not substitute a lighter gray step (e.g. borderSubtle, gray40 or below) for this specific non-text use without recomputing, since gray40 (#a8a8a8) on white computes to only 2.38:1 and would fail SC 1.4.11 outright.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "border",
+        "com.carbon-design-system.mirrorsExistingTokens": ["borderStrong01", "background"],
+        "com.carbon-design-system.wcagSuccessCriterion": "1.4.11",
+        "com.carbon-design-system.computedContrastRatio": "3.32:1",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged",
+        "com.carbon-design-system.usageWarning": "non-text only; 3.32:1 does not clear the 4.5:1 SC 1.4.3 floor for normal text"
+      }
+    }
+  },
+  "target-size": {
+    "$description": "Minimum interactive target-size tokens, named after Carbon's existing `size*`/`spacing*`/`container*` scale family in packages/layout (sizeXSmall...size2XLarge; spacing01...spacing13; container01...container05 — see before/packages/layout/src/tokens.js and @carbon/layout@11.0.0). Addresses WCAG 2.2 SC 2.5.8 (Target Size Minimum, Level AA — 24x24 CSS px minimum for the operable area of any pointer input target, with an exception for inline text, equivalent targets, or user-agent-controlled targets).",
+    "sizeMinTarget": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Minimum clickable/tappable area, in CSS px, for any standalone interactive control (icon-only Button, overflow-menu trigger, close/dismiss icon, pagination item) — satisfies WCAG 2.2 SC 2.5.8 (24x24 CSS px minimum, Level AA) exactly at the floor. Deliberately set equal to three of Carbon's own existing scale rungs that already converge on 24px by coincidence, not design: sizeXSmall (rem(24), packages/layout), container01 (miniUnits(3) = rem(8*3) = rem(24)), and spacing06 (miniUnits(3), same computation). None of those three existing tokens carries any accessibility documentation or guarantee today — a component author could ship an interactive element sized below sizeXSmall (e.g. a compact/dense-mode icon trigger using iconSize01 = 1rem = 16px as its full hit area) and nothing in Carbon's token layer would flag it. sizeMinTarget exists as a semantic, accessibility-scoped alias so the WCAG floor is pinned to its own name and citation rather than riding silently on a generic size rung that a future visual redesign could change for unrelated reasons.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "layout-size",
+        "com.carbon-design-system.relatedExistingTokens": ["sizeXSmall", "container01", "spacing06", "iconSize01"],
+        "com.carbon-design-system.wcagSuccessCriterion": "2.5.8",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged"
+      }
+    },
+    "sizeMinTargetSpacing": {
+      "$type": "dimension",
+      "$value": "24px",
+      "$description": "Minimum center-to-center spacing to preserve between two adjacent interactive controls when at least one is smaller than sizeMinTarget (e.g. a compact-density icon-only trigger built at iconSize01 = 1rem = 16px, below the 24px floor). Implements WCAG 2.2 SC 2.5.8's spacing exception: an undersized target remains conforming if positioned so that a 24px-diameter circle centered on its bounding box does not intersect the equivalent circle of any adjacent target. Because each circle has a 12px radius, two adjacent undersized targets must be spaced at least 24px center-to-center to satisfy the exception — hence the same 24px value as sizeMinTarget, derived independently for a distinct purpose (spacing between undersized controls, not the hit area of a single control). Intended for Carbon's compact/dense-density component variants and icon-only toolbars where visually shrinking every control below 24px is a deliberate density choice.",
+      "$extensions": {
+        "com.carbon-design-system.tokenCategory": "layout-size",
+        "com.carbon-design-system.relatedExistingTokens": ["sizeMinTarget", "iconSize01", "spacing06"],
+        "com.carbon-design-system.wcagSuccessCriterion": "2.5.8",
+        "com.carbon-design-system.status": "independent-research-proposal-not-merged"
+      }
+    }
+  }
+}

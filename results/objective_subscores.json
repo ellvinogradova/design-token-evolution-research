@@ -1,0 +1,147 @@
+[
+  {
+    "system": "Ant Design",
+    "slug": "ant-design",
+    "before_tag": "4.24.16",
+    "after_tag": "5.0.0",
+    "before": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 0,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 1,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "flat"
+    },
+    "after": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 0,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 1,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "3-layer"
+    },
+    "delta": 0
+  },
+  {
+    "system": "Carbon Design System",
+    "slug": "carbon",
+    "before_tag": "v10.60.5",
+    "after_tag": "v11.0.0",
+    "before": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 0,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 1,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "2-layer"
+    },
+    "after": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 0,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 1,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "2-layer"
+    },
+    "delta": 0
+  },
+  {
+    "system": "Fluent UI",
+    "slug": "fluent-ui",
+    "before_tag": "@fluentui/theme_v1.4.0",
+    "after_tag": "@fluentui/react-theme_v9.0.0",
+    "before": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 0,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 1,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "flat"
+    },
+    "after": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 1,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 2,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "2-layer"
+    },
+    "delta": 1
+  },
+  {
+    "system": "Material Design / MUI",
+    "slug": "mui",
+    "before_tag": "v5.16.7",
+    "after_tag": "v6.0.0",
+    "before": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 1,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 2,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "flat"
+    },
+    "after": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 1,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 2,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "2-layer"
+    },
+    "delta": 0
+  },
+  {
+    "system": "Shopify Polaris",
+    "slug": "polaris",
+    "before_tag": "@shopify/polaris-tokens@7.12.1",
+    "after_tag": "@shopify/polaris-tokens@8.0.0",
+    "before": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 1,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 2,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "2-layer"
+    },
+    "after": {
+      "dtcg_point": 0,
+      "accessibility_points": {
+        "contrast_safe_pairs": 1,
+        "focus_ring": 1,
+        "target_size": 0
+      },
+      "objective_subscore": 2,
+      "reduced_motion_present_not_scored": false,
+      "layering_not_scored": "2-layer"
+    },
+    "delta": 0
+  }
+]

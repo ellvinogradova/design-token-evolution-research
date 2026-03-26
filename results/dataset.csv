@@ -1,0 +1,16 @@
+system,slug,phase,tag,total_tokens,cat_color,cat_typography,cat_spacing,cat_radius,cat_shadow,cat_motion,cat_other,layering,dtcg_compliant,contrast_safe_pairs,focus_ring,target_size,reduced_motion
+Ant Design,ant-design,before,4.24.16,915,333,75,181,16,10,17,283,flat,no,False,True,False,False
+Ant Design,ant-design,after,5.0.0,231,103,22,36,5,12,13,40,3-layer,no,False,True,False,False
+Ant Design,ant-design,diff,,,,,,,,,,,,915,231,34,
+Carbon Design System,carbon,before,v10.60.5,242,146,58,37,0,1,0,0,2-layer,no,False,True,False,False
+Carbon Design System,carbon,after,v11.0.0,184,95,58,30,0,1,0,0,2-layer,no,False,True,False,False
+Carbon Design System,carbon,diff,,,,,,,,,,,,101,43,67,
+Fluent UI,fluent-ui,before,@fluentui/theme_v1.4.0,354,219,70,5,3,9,44,4,flat,no,False,True,False,False
+Fluent UI,fluent-ui,after,@fluentui/react-theme_v9.0.0,576,463,42,33,6,12,16,4,2-layer,no,True,True,False,False
+Fluent UI,fluent-ui,diff,,,,,,,,,,,,352,574,7,
+Material Design / MUI,mui,before,v5.16.7,110,108,0,0,0,0,0,2,flat,no,True,True,False,False
+Material Design / MUI,mui,after,v6.0.0,121,108,8,1,0,0,0,4,2-layer,no,True,True,False,False
+Material Design / MUI,mui,diff,,,,,,,,,,,,1,12,0,
+Shopify Polaris,polaris,before,@shopify/polaris-tokens@7.12.1,969,657,92,63,19,47,23,68,2-layer,no,True,True,False,False
+Shopify Polaris,polaris,after,@shopify/polaris-tokens@8.0.0,674,432,78,47,10,23,23,61,2-layer,no,True,True,False,False
+Shopify Polaris,polaris,diff,,,,,,,,,,,,295,0,0,

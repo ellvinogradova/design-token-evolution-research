@@ -1,0 +1,26 @@
+{
+  "system": "Shopify Polaris (fallback, replacing Atlassian Design System)",
+  "fallback_invoked": true,
+  "fallback_reason": "Atlassian's real public source (bitbucket.org/atlassian/atlassian-frontend-mirror, confirmed HTTP 200, real token/codemod files present -- see data/preflight/atlassian-investigation-not-used.json) has zero git tags and bot-squashed nightly snapshot history with no correspondence to the private repo's real commits (changelog-cited commit hashes 404 publicly). This breaks the tag-based before/after diffing methodology required by this study (plan section 4.1/4.4). Pre-registered fallback rule (plan section 6, Day 1) invoked.",
+  "repo_url": "https://github.com/Shopify/polaris-react",
+  "repo_url_note": "The repo was renamed from 'Shopify/polaris' to 'Shopify/polaris-react'; api.github.com/repositories/88897663 resolves to the current name. Old 'Shopify/polaris' git remote URL still resolves via redirect for cloning/ls-remote, but cite the current URL.",
+  "confirmed": true,
+  "before_tag": "@shopify/polaris-tokens@7.12.1",
+  "after_tag": "@shopify/polaris-tokens@8.0.0",
+  "before_token_paths": [
+    "polaris-tokens/src/colors.ts",
+    "polaris-tokens/src/colors-experimental.ts",
+    "polaris-tokens/src/size.ts",
+    "polaris-tokens/src/utilities.ts",
+    "polaris-tokens/src/themes/"
+  ],
+  "after_token_paths": [
+    "polaris-tokens/src/colors.ts",
+    "polaris-tokens/src/size.ts",
+    "polaris-tokens/src/utils.ts",
+    "polaris-tokens/src/themes/"
+  ],
+  "architecture_claim_verified": "partial",
+  "confidence": "high",
+  "notes": "Unlike the other 4 systems, polaris-tokens has been a dedicated standalone token package since v5+ -- there is no 'pre-tokens' era inside this package's own history, so it is not a 'flat variables -> layered tokens' story like Ant Design's. Instead, v8.0.0 is the best-documented architecture transition in the package's own CHANGELOG.md (fetched and confirmed via raw.githubusercontent.com at the 9.0.0 tag): it explicitly 'Removed legacy v11 border/font/space/shadow/color tokens' and 'Added border-radius semantic layer' (PRs #10673, #10760, #10779, #10801, #10669 -- all real, resolvable GitHub links), i.e. a legacy-token-cleanup + semantic-layer-formalization moment. Confirmed via GitHub Contents API that source structure genuinely changed between 7.12.1 and 8.0.0 (colors-experimental.ts removed, utilities.ts renamed to utils.ts). v9.0.0, despite being the newest major at time of writing, is NOT a token-architecture change -- its changelog shows only a Node.js minimum-version bump -- so it was correctly rejected as the 'after' reference in favor of 8.0.0. Framing for the writeup: this system's contribution to the comparative study is 'formalizing/cleaning up an already-tokenized system by removing a parallel legacy layer and adding a semantic layer', a genuinely different and useful contrast case against the other 4 systems (each of which introduced token architecture where none existed before) -- describe it accurately as that contrast rather than forcing it into the same 'tokens introduced' narrative shape."
+}

@@ -1,0 +1,31 @@
+{
+  "system": "Material Design / MUI",
+  "repo_url": "https://github.com/mui/material-ui",
+  "confirmed": true,
+  "before_tag": "v5.16.7",
+  "after_tag": "v6.0.0",
+  "before_token_paths": [
+    "packages/mui-material/src/styles/createTheme.js",
+    "packages/mui-material/src/styles/createPalette.js",
+    "packages/mui-material/src/styles/experimental_extendTheme.js",
+    "packages/mui-material/src/styles/CssVarsProvider.tsx",
+    "packages/mui-material/src/styles/ThemeProvider.js",
+    "packages/mui-material/src/styles/index.js"
+  ],
+  "after_token_paths": [
+    "packages/mui-material/src/styles/createTheme.ts",
+    "packages/mui-material/src/styles/createPalette.js",
+    "packages/mui-material/src/styles/createThemeWithVars.js",
+    "packages/mui-material/src/styles/createThemeNoVars.js",
+    "packages/mui-material/src/styles/createColorScheme.ts",
+    "packages/mui-material/src/styles/ThemeProviderWithVars.tsx",
+    "packages/mui-material/src/styles/ThemeProviderNoVars.tsx",
+    "packages/mui-material/src/styles/stringifyTheme.ts",
+    "packages/mui-material/src/styles/experimental_extendTheme.js",
+    "packages/mui-material/src/styles/index.js",
+    "packages/mui-system/src/cssVars"
+  ],
+  "architecture_claim_verified": "partial",
+  "confidence": "high",
+  "notes": "All facts below were confirmed live via tool calls on 2026-07-24, not assumed. TAGS: `git ls-remote --tags https://github.com/mui/material-ui.git` returns 919 refs, almost all plain `vX.Y.Z` (577 non-dereferenced) covering the whole monorepo (mui-material, mui-system, mui-joy, mui-lab, etc. are versioned together in this repo; mui-x is a separate GitHub repo and not part of this tag set). Filtering to `^v5\\.[0-9]+\\.[0-9]+$` and `^v6\\.[0-9]+\\.[0-9]+$` and sorting with `sort -V` gives v5.0.0 through v5.18.0 (154 tags) and v6.0.0 onward. IMPORTANT DEVIATION FROM A NAIVE 'LAST TAG' READING: the highest-numbered v5 tag is v5.18.0, but its commit date (via GitHub commits API) is 2025-07-08 -- over 10 months AFTER v6.0.0 shipped (2024-08-27). MUI kept an LTS-style v5 branch alive with patch releases (v5.16.8 through v5.18.1) long after v6.0.0 was released, so v5.18.0 is not a meaningful 'immediately pre-v6' snapshot. I instead used v5.16.7 (commit date 2024-08-09, 18 days before v6.0.0) as before_tag -- the last v5 patch released before the v6.0.0 GA -- which is the historically correct boundary for a before/after architecture diff. `@mui/material` package.json version was directly confirmed at both tags (5.16.7 and 6.0.0 respectively) via raw.githubusercontent.com fetches. SOURCE LAYOUT: GitHub Contents API listings of packages/mui-material/src/styles at both tags show a real structural change: v5.16.7 has createTheme.js (plain JS) plus a separately-named, prefix-flagged `experimental_extendTheme.js` and a standalone `CssVarsProvider.tsx` component, both exported from index.js only under the `experimental_` name/as a distinct provider -- confirmed by grepping index.js source (`export { default as experimental_extendTheme } ...`, `export * from './CssVarsProvider'`). At v6.0.0, CssVarsProvider.tsx is GONE; in its place: ThemeProviderWithVars.tsx + ThemeProviderNoVars.tsx (both now used internally by the single ThemeProvider.tsx), createThemeWithVars.js + createThemeNoVars.js, createColorScheme.ts, and stringifyTheme.ts (injects CSS var values as a <style> tag). Critically, createTheme.ts at v6.0.0 (fetched and read directly) is now a unified TypeScript entry point whose options type includes a top-level `cssVariables?: boolean | {...}` flag, and internally calls createThemeWithVars() when cssVariables is truthy, createThemeNoVars() otherwise -- this is the load-bearing evidence for 'CSS-variable-based theming became a first-class, stable option of the core createTheme() API in v6.' index.js at v6.0.0 also now exports a non-prefixed, stable `extendTheme` (pointing to createThemeWithVars), while `experimental_extendTheme` is kept only for backward compatibility with an explicit `// TODO: Remove in v7` comment. packages/mui-system/src/cssVars also exists at v6.0.0 as a supporting directory. NUANCE THAT WEAKENS THE PLAN'S 'PURELY JS-OBJECT-BASED IN V5' FRAMING (why architecture_claim_verified is 'partial', not true): CSS-variable-capable theming (`experimental_extendTheme` / `CssVarsProvider`) was NOT new in v6 -- I bisected the v5.x tag history via the same Contents API and confirmed it was absent at v5.0.0 and v5.5.0, and present starting at v5.6.0 (commit date 2022-04-06), i.e. CSS variables support shipped incrementally as an experimental, explicitly-flagged, opt-in parallel API roughly 2 years before v6.0.0, exactly as the task's fallback-consideration warned might be the case. What v6.0.0 actually did, precisely, was graduate that pre-existing experimental system into the default/stable/unified theme-creation path (single createTheme() with a cssVariables flag, non-experimental extendTheme export) rather than introduce CSS custom-property theming for the first time. The GitHub Releases API entry for v6.0.0 corroborates this framing: its changelog is a short, mostly-cleanup diff ('Prepare for v6 stable release', 'Fix CSS theme variables section' in docs) referencing 'the blog post' (mui.com/blog/material-ui-v6-is-out) for the substantive feature narrative -- consistent with v6.0.0 being a stabilization/graduation milestone for work already underway in v5, not a big-bang rewrite at the tag boundary. Researchers should frame the v5->v6 MUI transition as 'CSS-variable theming graduated from experimental/opt-in (v5.6.0+) to first-class/stable/default-capable (v6.0.0)', not 'CSS variables introduced in v6 replacing a pure-JS-object v5 theme'. No fallback system was needed; confidence is high because every claim above (tag list, package versions, commit dates, file listings, source contents, export statements, createTheme.ts option types, release notes) was independently confirmed via direct tool calls (git ls-remote, GitHub Contents/Commits/Releases APIs, raw file fetches) rather than inferred."
+}

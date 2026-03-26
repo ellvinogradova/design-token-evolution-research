@@ -1,0 +1,3 @@
+[
+  {"system": "Fluent UI", "phase": "before", "category": "focus_ring", "blind_present": true, "blind_evidence": "packages/theme/src/types/ISemanticColors.ts:131 `focusBorder: string;` documented as 'The color of the outline around focused controls that don't already have a border'; also packages/theme/src/types/Theme.ts:20-21 `focusColor?: string; focusInnerColor?: string;` in the ColorTokenSet type used for component color tokens."}
+]

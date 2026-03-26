@@ -1,0 +1,180 @@
+[
+  {
+    "system": "Ant Design",
+    "slug": "ant-design",
+    "phase": "before",
+    "tag": "4.24.16",
+    "paths": [
+      "components/style/themes/default.less",
+      "components/style/themes/dark.less",
+      "components/style/themes/compact.less",
+      "components/style/themes/variable.less",
+      "components/style/themes/index.less",
+      "docs/react/customize-theme.en-US.md",
+      "docs/react/customize-theme-variable.en-US.md"
+    ],
+    "dest": "data/repos/ant-design/before"
+  },
+  {
+    "system": "Ant Design",
+    "slug": "ant-design",
+    "phase": "after",
+    "tag": "5.0.0",
+    "paths": [
+      "components/theme/interface.ts",
+      "components/theme/index.tsx",
+      "components/theme/export.ts",
+      "components/theme/themes/seed.ts",
+      "components/theme/themes/ColorMap.ts",
+      "components/theme/themes/default/index.ts",
+      "components/theme/themes/default/colors.ts",
+      "components/theme/themes/default/colorAlgorithm.ts",
+      "components/theme/themes/dark/index.ts",
+      "components/theme/themes/dark/colors.ts",
+      "components/theme/themes/dark/colorAlgorithm.ts",
+      "components/theme/themes/compact/index.ts",
+      "components/theme/themes/compact/genCompactSizeMapToken.ts",
+      "components/theme/themes/shared/genColorMapToken.ts",
+      "components/theme/themes/shared/genCommonMapToken.ts",
+      "components/theme/themes/shared/genSizeMapToken.ts",
+      "components/theme/themes/shared/genControlHeight.ts",
+      "components/theme/themes/shared/genFontSizes.ts",
+      "components/theme/themes/shared/genRadius.ts",
+      "components/theme/util/alias.ts",
+      "components/theme/util/genComponentStyleHook.ts",
+      "components/theme/util/getAlphaColor.ts",
+      "components/theme/util/statistic.ts",
+      "docs/react/customize-theme-v5.en-US.md"
+    ],
+    "dest": "data/repos/ant-design/after"
+  },
+  {
+    "system": "Fluent UI",
+    "slug": "fluent-ui",
+    "phase": "before",
+    "tag": "@fluentui/theme_v1.4.0",
+    "paths": [
+      "packages/theme/src/createTheme.ts",
+      "packages/theme/src/FluentTheme.ts",
+      "packages/theme/src/mergeThemes.ts",
+      "packages/theme/src/types",
+      "packages/theme/src/colors",
+      "packages/theme/src/effects",
+      "packages/theme/src/fonts",
+      "packages/theme/src/spacing"
+    ],
+    "dest": "data/repos/fluent-ui/before"
+  },
+  {
+    "system": "Fluent UI",
+    "slug": "fluent-ui",
+    "phase": "after",
+    "tag": "@fluentui/react-theme_v9.0.0",
+    "paths": [
+      "packages/react-components/react-theme/src/global",
+      "packages/react-components/react-theme/src/alias",
+      "packages/react-components/react-theme/src/tokens.ts",
+      "packages/react-components/react-theme/src/themes",
+      "packages/react-components/react-theme/src/index.ts"
+    ],
+    "dest": "data/repos/fluent-ui/after"
+  },
+  {
+    "system": "Carbon Design System",
+    "slug": "carbon",
+    "phase": "before",
+    "tag": "v10.60.5",
+    "paths": [
+      "packages/themes/src/tokens.js",
+      "packages/themes/src/g10.js",
+      "packages/themes/src/g90.js",
+      "packages/themes/src/g100.js",
+      "packages/themes/src/white.js",
+      "packages/themes/src/next/tokens/",
+      "packages/layout/src/tokens.js",
+      "packages/type/src/tokens.js",
+      "packages/type/src/scale.js"
+    ],
+    "dest": "data/repos/carbon/before"
+  },
+  {
+    "system": "Carbon Design System",
+    "slug": "carbon",
+    "phase": "after",
+    "tag": "v11.0.0",
+    "paths": [
+      "packages/themes/src/tokens/",
+      "packages/themes/src/g10.js",
+      "packages/themes/src/g90.js",
+      "packages/themes/src/g100.js",
+      "packages/themes/src/white.js",
+      "packages/themes/src/v10/",
+      "packages/layout/src/tokens.js",
+      "packages/type/src/tokens.js",
+      "packages/type/src/scale.js"
+    ],
+    "dest": "data/repos/carbon/after"
+  },
+  {
+    "system": "Material Design / MUI",
+    "slug": "mui",
+    "phase": "before",
+    "tag": "v5.16.7",
+    "paths": [
+      "packages/mui-material/src/styles/createTheme.js",
+      "packages/mui-material/src/styles/createPalette.js",
+      "packages/mui-material/src/styles/experimental_extendTheme.js",
+      "packages/mui-material/src/styles/CssVarsProvider.tsx",
+      "packages/mui-material/src/styles/ThemeProvider.js",
+      "packages/mui-material/src/styles/index.js"
+    ],
+    "dest": "data/repos/mui/before"
+  },
+  {
+    "system": "Material Design / MUI",
+    "slug": "mui",
+    "phase": "after",
+    "tag": "v6.0.0",
+    "paths": [
+      "packages/mui-material/src/styles/createTheme.ts",
+      "packages/mui-material/src/styles/createPalette.js",
+      "packages/mui-material/src/styles/createThemeWithVars.js",
+      "packages/mui-material/src/styles/createThemeNoVars.js",
+      "packages/mui-material/src/styles/createColorScheme.ts",
+      "packages/mui-material/src/styles/ThemeProviderWithVars.tsx",
+      "packages/mui-material/src/styles/ThemeProviderNoVars.tsx",
+      "packages/mui-material/src/styles/stringifyTheme.ts",
+      "packages/mui-material/src/styles/experimental_extendTheme.js",
+      "packages/mui-material/src/styles/index.js",
+      "packages/mui-system/src/cssVars"
+    ],
+    "dest": "data/repos/mui/after"
+  },
+  {
+    "system": "Shopify Polaris (fallback, replacing Atlassian Design System)",
+    "slug": "polaris",
+    "phase": "before",
+    "tag": "@shopify/polaris-tokens@7.12.1",
+    "paths": [
+      "polaris-tokens/src/colors.ts",
+      "polaris-tokens/src/colors-experimental.ts",
+      "polaris-tokens/src/size.ts",
+      "polaris-tokens/src/utilities.ts",
+      "polaris-tokens/src/themes/"
+    ],
+    "dest": "data/repos/polaris/before"
+  },
+  {
+    "system": "Shopify Polaris (fallback, replacing Atlassian Design System)",
+    "slug": "polaris",
+    "phase": "after",
+    "tag": "@shopify/polaris-tokens@8.0.0",
+    "paths": [
+      "polaris-tokens/src/colors.ts",
+      "polaris-tokens/src/size.ts",
+      "polaris-tokens/src/utils.ts",
+      "polaris-tokens/src/themes/"
+    ],
+    "dest": "data/repos/polaris/after"
+  }
+]

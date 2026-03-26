@@ -1,0 +1,3 @@
+[
+  {"system": "Ant Design", "phase": "after", "category": "reduced_motion", "blind_present": false, "blind_evidence": "components/theme/themes/seed.ts:44-53 and components/theme/interface.ts:171-181,331-334 define only generic motion tokens (motionUnit, motionBase, motionDurationFast/Mid/Slow, motionEaseOut/InOut/OutCirc/etc.) with no reduced-motion or accessibility framing. Repo-wide search for 'reduced-motion' / 'prefers-reduced-motion' across the entire after/ tree returned zero matches."}
+]

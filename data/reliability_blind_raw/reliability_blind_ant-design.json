@@ -1,0 +1,23 @@
+[
+  {
+    "system": "Ant Design",
+    "phase": "before",
+    "category": "focus_ring",
+    "blind_present": true,
+    "blind_evidence": "components/style/themes/default.less:181-184 defines dedicated focus-outline tokens (@outline-blur-size: 0; @outline-width: 2px; @outline-color: @primary-color; @outline-fade: 20%), mirrored in variable.less:236-239 as CSS-var-backed Less variables; also @link-focus-outline (default.less:154) and @input-outline-offset (default.less:461)."
+  },
+  {
+    "system": "Ant Design",
+    "phase": "after",
+    "category": "focus_ring",
+    "blind_present": true,
+    "blind_evidence": "components/theme/interface.ts:391 (controlOutline: string) and :424 (controlOutlineWidth: number) are dedicated AliasToken fields for the focus outline color/width, computed in components/theme/util/alias.ts:96 (controlOutlineWidth = lineWidth * 2) and :105 (controlOutline = getAlphaColor(colorPrimaryBg, colorBgContainer)); also controlTmpOutline (interface.ts:492, documented as 'Used for DefaultButton, Switch which has default outline')."
+  },
+  {
+    "system": "Ant Design",
+    "phase": "after",
+    "category": "target_size",
+    "blind_present": false,
+    "blind_evidence": "Searched components/theme/interface.ts, seed.ts, util/alias.ts, and other theme/util files for target/touch/tap/hit-area/min-width/min-height terms; no matches. controlHeight (seed.ts:64) is a general control-height token and controlInteractiveSize (alias.ts:98, commented 'Checkbox size and expand icon size') sizes inner icon glyphs, not a minimum touch/click target hit-area token per WCAG 2.5.8 -- no dedicated target-size token found."
+  }
+]

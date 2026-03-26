@@ -1,0 +1,90 @@
+{
+  "methodology": "Blind same-model re-code via context-isolated subagent instances (fresh Agent calls with zero access to this conversation or to results/tokens_*.json), not a time-based 24h gap. See plan sec 4.6 for rationale: a time gap does not blind an LLM within the same context, since nothing decays; a fresh, isolated agent instance given only the rubric and raw source files provides genuine blindness to the original verdict. Caveat: this tests memory-independent consistency, not independence from systematic model bias -- two instances of the same underlying model may share correlated judgment tendencies that two different human coders would not. Framed here as what it is, not oversold as inter-rater reliability.",
+  "sample_size": 8,
+  "total_population": 40,
+  "sample_fraction": 0.2,
+  "agreement_count": 8,
+  "agreement_rate": 1.0,
+  "comparisons": [
+    {
+      "system": "Ant Design",
+      "phase": "after",
+      "category": "reduced_motion",
+      "original_present": false,
+      "original_evidence": "",
+      "blind_present": false,
+      "blind_evidence": "components/theme/themes/seed.ts:44-53 and components/theme/interface.ts:171-181,331-334 define only generic motion tokens (motionUnit, motionBase, motionDurationFast/Mid/Slow, motionEaseOut/InOut/OutCirc/etc.) with no reduced-motion or accessibility framing. Repo-wide search for 'reduced-motion' / 'prefers-reduced-motion' across the entire after/ tree returned zero matches.",
+      "agree": true
+    },
+    {
+      "system": "Ant Design",
+      "phase": "before",
+      "category": "focus_ring",
+      "original_present": true,
+      "original_evidence": "components/style/themes/variable.less:209-210 declares @link-focus-decoration: none; and @link-focus-outline: 0; (link focus-state tokens -- note the value explicitly disables the native focus outline rather than replacing it with a styled one, a real accessibility caveat, not an enhancement). variable.less:235-239, under a '// Outline' section header, declares @outline-blur-size: 0, @outline-width: 2px, @outline-color: @primary-color (commented '// No use anymore'), and @outline-fade: 20% -- a blur/width/color trio consistent with driving an interactive/focus glow via box-shadow, though the component CSS that would consume them was not part of this extraction (only components/style/themes/ was pulled, see data/extraction-manifest.json), so consumption could not be directly confirmed.",
+      "blind_present": true,
+      "blind_evidence": "components/style/themes/default.less:181-184 defines dedicated focus-outline tokens (@outline-blur-size: 0; @outline-width: 2px; @outline-color: @primary-color; @outline-fade: 20%), mirrored in variable.less:236-239 as CSS-var-backed Less variables; also @link-focus-outline (default.less:154) and @input-outline-offset (default.less:461).",
+      "agree": true
+    },
+    {
+      "system": "Fluent UI",
+      "phase": "before",
+      "category": "focus_ring",
+      "original_present": true,
+      "original_evidence": "before/packages/theme/src/types/ISemanticColors.ts:131: focusBorder: string;",
+      "blind_present": true,
+      "blind_evidence": "packages/theme/src/types/ISemanticColors.ts:131 `focusBorder: string;` documented as 'The color of the outline around focused controls that don't already have a border'; also packages/theme/src/types/Theme.ts:20-21 `focusColor?: string; focusInnerColor?: string;` in the ColorTokenSet type used for component color tokens.",
+      "agree": true
+    },
+    {
+      "system": "Carbon Design System",
+      "phase": "after",
+      "category": "reduced_motion",
+      "original_present": false,
+      "original_evidence": "",
+      "blind_present": false,
+      "blind_evidence": "Searched all files under packages/layout, packages/type, and packages/themes (v11.0.0) for 'motion', 'duration', 'easing', 'transition', 'reduced-motion', 'prefers-reduced-motion' \u2014 zero matches. No motion-related tokens or package exist in the available source tree.",
+      "agree": true
+    },
+    {
+      "system": "Carbon Design System",
+      "phase": "after",
+      "category": "target_size",
+      "original_present": false,
+      "original_evidence": "",
+      "blind_present": false,
+      "blind_evidence": "Searched packages/layout/src/tokens.js and packages/themes/src/{g10,g90,g100,white}.js (v11.0.0). Only generic sizing tokens exist ('container01'-'container05', 'sizeXSmall'-'size2XLarge', 'iconSize01'-'iconSize02'); no pixel/value definitions are present in the checked-out source, and none of the tokens or surrounding code is named or documented as a minimum touch/click target size or hit-area (no 'target', 'touch', 'hit' references found).",
+      "agree": true
+    },
+    {
+      "system": "Carbon Design System",
+      "phase": "before",
+      "category": "contrast_safe_pairs",
+      "original_present": false,
+      "original_evidence": "",
+      "blind_present": false,
+      "blind_evidence": "Searched packages/themes/src/tokens.js, g10.js, g90.js, g100.js, white.js (v10.60.5). Color tokens (e.g. text01, ui01, interactive01) are defined as plain palette aliases (e.g. `export const text01 = gray100;`) with no accompanying documentation, comment, or naming that identifies specific text/surface pairs as meeting a contrast ratio (no '4.5:1', 'AA', 'contrast', or similar annotation found anywhere in the available source).",
+      "agree": true
+    },
+    {
+      "system": "Ant Design",
+      "phase": "after",
+      "category": "target_size",
+      "original_present": false,
+      "original_evidence": "",
+      "blind_present": false,
+      "blind_evidence": "Searched components/theme/interface.ts, seed.ts, util/alias.ts, and other theme/util files for target/touch/tap/hit-area/min-width/min-height terms; no matches. controlHeight (seed.ts:64) is a general control-height token and controlInteractiveSize (alias.ts:98, commented 'Checkbox size and expand icon size') sizes inner icon glyphs, not a minimum touch/click target hit-area token per WCAG 2.5.8 -- no dedicated target-size token found.",
+      "agree": true
+    },
+    {
+      "system": "Ant Design",
+      "phase": "after",
+      "category": "focus_ring",
+      "original_present": true,
+      "original_evidence": "components/theme/interface.ts:391-392 declares controlOutline: string and colorWarningOutline/colorErrorOutline: string on AliasToken; interface.ts:424 declares controlOutlineWidth: number; interface.ts:466 declares linkFocusDecoration: React.CSSProperties['textDecoration']; interface.ts:491-492 declares controlTmpOutline: string with the comment 'Used for DefaultButton, Switch which has default outline'. components/theme/util/alias.ts:96,104-105 compute controlOutlineWidth and controlOutline via getAlphaColor(...), and util/alias.ts:119 sets linkFocusDecoration: 'none' by default -- as in v4, the link focus decoration token exists but defaults to disabling visible focus styling rather than styling it, a recurring caveat across both versions.",
+      "blind_present": true,
+      "blind_evidence": "components/theme/interface.ts:391 (controlOutline: string) and :424 (controlOutlineWidth: number) are dedicated AliasToken fields for the focus outline color/width, computed in components/theme/util/alias.ts:96 (controlOutlineWidth = lineWidth * 2) and :105 (controlOutline = getAlphaColor(colorPrimaryBg, colorBgContainer)); also controlTmpOutline (interface.ts:492, documented as 'Used for DefaultButton, Switch which has default outline').",
+      "agree": true
+    }
+  ]
+}

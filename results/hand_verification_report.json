@@ -1,0 +1,111 @@
+{
+  "methodology_note": "Automated check confirms sampled token names appear as real declarations in the extracted source, either literally or as a documented parser-generated composite (e.g. nested-object flattening, setColor()/setColorChannel() call idioms). Two remaining automated failures (MUI: dividerChannel, common.onBackgroundChannel) were individually hand-verified against source (setColorChannel(palette.<group>, '<key>') calls at createThemeWithVars.js/experimental_extendTheme.js, matching the parser docstring convention) and confirmed genuine, not fabricated -- the automated script does not special-case the Channel-suffix pattern, so these are documented false negatives in the QA script itself, not data-quality issues in Day 3's extraction.",
+  "automated_pass_rate": "435/437 (99.5%)",
+  "pass_rate_after_manual_review": "437/437 (100%) -- 2 automated misses individually hand-confirmed as genuine tokens",
+  "per_system": [
+    {
+      "system": "Ant Design",
+      "slug": "ant-design",
+      "phases": {
+        "before": {
+          "total_tokens": 915,
+          "sample_size": 92,
+          "pass_count": 92,
+          "pass_rate": 1.0,
+          "failures": []
+        },
+        "after": {
+          "total_tokens": 231,
+          "sample_size": 23,
+          "pass_count": 23,
+          "pass_rate": 1.0,
+          "failures": []
+        }
+      }
+    },
+    {
+      "system": "Carbon Design System",
+      "slug": "carbon",
+      "phases": {
+        "before": {
+          "total_tokens": 242,
+          "sample_size": 24,
+          "pass_count": 24,
+          "pass_rate": 1.0,
+          "failures": []
+        },
+        "after": {
+          "total_tokens": 184,
+          "sample_size": 18,
+          "pass_count": 18,
+          "pass_rate": 1.0,
+          "failures": []
+        }
+      }
+    },
+    {
+      "system": "Fluent UI",
+      "slug": "fluent-ui",
+      "phases": {
+        "before": {
+          "total_tokens": 354,
+          "sample_size": 35,
+          "pass_count": 35,
+          "pass_rate": 1.0,
+          "failures": []
+        },
+        "after": {
+          "total_tokens": 576,
+          "sample_size": 58,
+          "pass_count": 58,
+          "pass_rate": 1.0,
+          "failures": []
+        }
+      }
+    },
+    {
+      "system": "Material Design / MUI",
+      "slug": "mui",
+      "phases": {
+        "before": {
+          "total_tokens": 110,
+          "sample_size": 11,
+          "pass_count": 10,
+          "pass_rate": 0.909,
+          "failures": [
+            "dividerChannel"
+          ]
+        },
+        "after": {
+          "total_tokens": 121,
+          "sample_size": 12,
+          "pass_count": 11,
+          "pass_rate": 0.917,
+          "failures": [
+            "common.onBackgroundChannel"
+          ]
+        }
+      }
+    },
+    {
+      "system": "Shopify Polaris",
+      "slug": "polaris",
+      "phases": {
+        "before": {
+          "total_tokens": 969,
+          "sample_size": 97,
+          "pass_count": 97,
+          "pass_rate": 1.0,
+          "failures": []
+        },
+        "after": {
+          "total_tokens": 674,
+          "sample_size": 67,
+          "pass_count": 67,
+          "pass_rate": 1.0,
+          "failures": []
+        }
+      }
+    }
+  ]
+}

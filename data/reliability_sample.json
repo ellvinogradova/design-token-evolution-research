@@ -1,0 +1,77 @@
+{
+  "all_items_count": 40,
+  "sample": [
+    {
+      "system": "Ant Design",
+      "slug": "ant-design",
+      "phase": "after",
+      "tag": "5.0.0",
+      "category": "reduced_motion",
+      "original_present": false,
+      "original_evidence": ""
+    },
+    {
+      "system": "Ant Design",
+      "slug": "ant-design",
+      "phase": "before",
+      "tag": "4.24.16",
+      "category": "focus_ring",
+      "original_present": true,
+      "original_evidence": "components/style/themes/variable.less:209-210 declares @link-focus-decoration: none; and @link-focus-outline: 0; (link focus-state tokens -- note the value explicitly disables the native focus outline rather than replacing it with a styled one, a real accessibility caveat, not an enhancement). variable.less:235-239, under a '// Outline' section header, declares @outline-blur-size: 0, @outline-width: 2px, @outline-color: @primary-color (commented '// No use anymore'), and @outline-fade: 20% -- a blur/width/color trio consistent with driving an interactive/focus glow via box-shadow, though the component CSS that would consume them was not part of this extraction (only components/style/themes/ was pulled, see data/extraction-manifest.json), so consumption could not be directly confirmed."
+    },
+    {
+      "system": "Fluent UI",
+      "slug": "fluent-ui",
+      "phase": "before",
+      "tag": "@fluentui/theme_v1.4.0",
+      "category": "focus_ring",
+      "original_present": true,
+      "original_evidence": "before/packages/theme/src/types/ISemanticColors.ts:131: focusBorder: string;"
+    },
+    {
+      "system": "Carbon Design System",
+      "slug": "carbon",
+      "phase": "after",
+      "tag": "v11.0.0",
+      "category": "reduced_motion",
+      "original_present": false,
+      "original_evidence": ""
+    },
+    {
+      "system": "Carbon Design System",
+      "slug": "carbon",
+      "phase": "after",
+      "tag": "v11.0.0",
+      "category": "target_size",
+      "original_present": false,
+      "original_evidence": ""
+    },
+    {
+      "system": "Carbon Design System",
+      "slug": "carbon",
+      "phase": "before",
+      "tag": "v10.60.5",
+      "category": "contrast_safe_pairs",
+      "original_present": false,
+      "original_evidence": ""
+    },
+    {
+      "system": "Ant Design",
+      "slug": "ant-design",
+      "phase": "after",
+      "tag": "5.0.0",
+      "category": "target_size",
+      "original_present": false,
+      "original_evidence": ""
+    },
+    {
+      "system": "Ant Design",
+      "slug": "ant-design",
+      "phase": "after",
+      "tag": "5.0.0",
+      "category": "focus_ring",
+      "original_present": true,
+      "original_evidence": "components/theme/interface.ts:391-392 declares controlOutline: string and colorWarningOutline/colorErrorOutline: string on AliasToken; interface.ts:424 declares controlOutlineWidth: number; interface.ts:466 declares linkFocusDecoration: React.CSSProperties['textDecoration']; interface.ts:491-492 declares controlTmpOutline: string with the comment 'Used for DefaultButton, Switch which has default outline'. components/theme/util/alias.ts:96,104-105 compute controlOutlineWidth and controlOutline via getAlphaColor(...), and util/alias.ts:119 sets linkFocusDecoration: 'none' by default -- as in v4, the link focus decoration token exists but defaults to disabling visible focus styling rather than styling it, a recurring caveat across both versions."
+    }
+  ]
+}

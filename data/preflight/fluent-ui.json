@@ -1,0 +1,32 @@
+{
+  "system": "Fluent UI",
+  "repo_url": "https://github.com/microsoft/fluentui",
+  "confirmed": true,
+  "before_tag": "@fluentui/theme_v1.4.0",
+  "after_tag": "@fluentui/react-theme_v9.0.0",
+  "after_tag_decision_note": "Decided post-agent-report: swapped the 'after' reference from the never-stabilized @fluentui/tokens_v1.0.0-alpha.23 to @fluentui/react-theme_v9.0.0 -- confirmed via `git ls-remote` this tag exists (commit 86df85a), and via GitHub Contents API that packages/react-components/react-theme/src at this tag contains 'alias/', 'global/', and 'tokens.ts' directly -- i.e. the same global+alias split, but in the actually-stable, actually-consumed package. @fluentui/tokens remains documented below as the internal alpha primitives layer react-theme depends on -- a genuine finding for the writeup (a system can ship a stable public token architecture built on a permanently-unstable internal package), not a flaw to hide.",
+  "before_token_paths": [
+    "packages/theme/src/createTheme.ts",
+    "packages/theme/src/FluentTheme.ts",
+    "packages/theme/src/mergeThemes.ts",
+    "packages/theme/src/types",
+    "packages/theme/src/colors",
+    "packages/theme/src/effects",
+    "packages/theme/src/fonts",
+    "packages/theme/src/spacing"
+  ],
+  "after_token_paths": [
+    "packages/react-components/react-theme/src/global",
+    "packages/react-components/react-theme/src/alias",
+    "packages/react-components/react-theme/src/tokens.ts",
+    "packages/react-components/react-theme/src/themes",
+    "packages/react-components/react-theme/src/index.ts"
+  ],
+  "after_token_paths_internal_dependency": [
+    "packages/tokens/src/global (internal, permanently-alpha primitives package that react-theme wraps)",
+    "packages/tokens/src/alias"
+  ],
+  "architecture_claim_verified": "partial",
+  "confidence": "high",
+  "notes": "Tag scheme: confirmed NOT plain vN.0.0. Every package tag in this monorepo follows `<npm-package-name>_v<semver>` (e.g. `@fluentui/react_v8.125.6`, `@fluentui/react-components_v9.x.x`), consistent with the plan's assumption. Verified via `git ls-remote --tags` (68,931 refs total, incl. peeled ^{} entries).\n\nBEFORE (v8/Fabric era, no tokens package existed): v8's styling primitives live in the standalone `@fluentui/theme` package (stable tags from v0.1.1 through v2.7.2+), not a subfolder of `@fluentui/react`. It exports a JS theme OBJECT model — `createTheme()`, `ITheme`/`IPalette`/`ISemanticColors` types, `mergeThemes()`, nested `colors/`, `effects/`, `fonts/`, `spacing/` — confirmed by browsing packages/theme/src at tag @fluentui/theme_v1.4.0 (commit 7fb5ac6, dated 2020-10-12) via the GitHub contents API. This is a defensible 'before' snapshot of the pre-tokens theming model.\n\nAFTER — IMPORTANT DEVIATION FROM THE PLAN: a `@fluentui/tokens` package does exist at packages/tokens and its src/ splits cleanly into `global/` (borderRadius, brandColors, colorPalette, colors, curves, durations, fonts, spacings, strokeWidths, typographyStyles) and `alias/` (darkColor, darkColorPalette, highContrastColor, lightColor, lightColorPalette, teamsDarkColor, teamsFontFamilies) — this exactly matches the hypothesized 'global tokens + semantic/alias tokens' split. HOWEVER, this package never reached a stable release: git tags for @fluentui/tokens run only from v1.0.0-alpha.1 to v1.0.0-alpha.23 (21 tags total), and both the HEAD package.json and the live npm registry (checked via registry.npmjs.org/@fluentui/tokens) confirm the npm dist-tag `latest` is itself `1.0.0-alpha.23` — there is no non-prerelease version, ever, in the package's history. The commit for tag alpha.23 is dated 2026-01-22, i.e. very recent/current, so this is not a stale artifact — the package appears to be intentionally kept as an internal, unstable dependency. Confirmed downstream: `@fluentui/react-components`'s package.json depends on `@fluentui/react-theme` (currently ^9.2.1, stable since tag @fluentui/react-theme_v9.0.0 dated 2022-06-28), NOT directly on `@fluentui/tokens`. `@fluentui/react-theme`'s own package.json in turn depends on `@fluentui/tokens@1.0.0-alpha.23`. So the actual, stably-versioned, publicly-consumed abstraction is `@fluentui/react-theme` (which builds webLightTheme/webDarkTheme etc. from the raw tokens); `@fluentui/tokens` is a real but permanently-alpha internal primitives package.\n\nRECOMMENDATION: architecture_claim_verified is marked 'partial' because the global+alias token split and the v8-theme-object-to-v9-tokens narrative are both true and well-evidenced, but the plan's assumption that there is 'a stable release tag of the tokens package' is false — no such tag exists. Researchers citing @fluentui/tokens as the 'v9 tokens package' should either (a) use the alpha tag as-is with an explicit caveat, as done here, or (b) substitute/also cite @fluentui/react-theme_v9.0.0 (or a later stable react-theme tag) as the actually-released, stable carrier of the v9 token/theme architecture. No fallback to a different design system is needed — the core hypothesis holds, just with this one important nuance about which package name/tag is 'stable'."
+}

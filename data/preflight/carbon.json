@@ -1,0 +1,32 @@
+{
+  "system": "Carbon Design System",
+  "repo_url": "https://github.com/carbon-design-system/carbon",
+  "confirmed": true,
+  "before_tag": "v10.60.5",
+  "after_tag": "v11.0.0",
+  "before_token_paths": [
+    "packages/themes/src/tokens.js",
+    "packages/themes/src/g10.js",
+    "packages/themes/src/g90.js",
+    "packages/themes/src/g100.js",
+    "packages/themes/src/white.js",
+    "packages/themes/src/next/tokens/",
+    "packages/layout/src/tokens.js",
+    "packages/type/src/tokens.js",
+    "packages/type/src/scale.js"
+  ],
+  "after_token_paths": [
+    "packages/themes/src/tokens/",
+    "packages/themes/src/g10.js",
+    "packages/themes/src/g90.js",
+    "packages/themes/src/g100.js",
+    "packages/themes/src/white.js",
+    "packages/themes/src/v10/",
+    "packages/layout/src/tokens.js",
+    "packages/type/src/tokens.js",
+    "packages/type/src/scale.js"
+  ],
+  "architecture_claim_verified": true,
+  "confidence": "high",
+  "notes": "Tag scheme is mixed, confirmed via `git ls-remote --tags`: the monorepo uses REPO-WIDE tags of the form vX.Y.Z (e.g. v10.60.5, v11.0.0) for the unified Lerna-style release train that both v10 and v11 belong to. There is also a small set of legacy PER-PACKAGE tags from an earlier pre-v10 era (e.g. @carbon/themes@10.3.1, @carbon/elements@10.3.1, @carbon/sketch@10.3.1, carbon-components@10.3.2, carbon-components-react@7.3.2) but these are NOT the scheme used for the v10->v11 transition itself -- @carbon/themes has no @carbon/themes@11.x.x tag; token package versions travel with the repo-wide vX.Y.Z tag. Confirmed via GitHub contents API that packages/themes, packages/layout, and packages/type exist at both v10.60.5 (last stable v10.x tag before v11.0.0) and v11.0.0 (first stable v11 tag). Notable architectural finding: v10.60.5 already contained a packages/themes/src/next/ directory with a preview of the v11 token structure, and v11.0.0 in turn ships a packages/themes/src/v10/ backward-compatibility module (with its own metadata.yml) explicitly to ease migration -- both point to a deliberate, staged token migration rather than a clean break. The color token source file changed shape from a single tokens.js in v10 to a tokens/ directory with a small object-model (Token.js/TokenSet.js/TokenGroup.js plus v11-specific TokenGroup/TokenSet variants) in v11, consistent with a genuine breaking restructuring of the color token layer; layout and type token source files (tokens.js) kept the same file path across the transition. Official migration guide confirmed live and substantive: https://carbondesignsystem.com/migrating/guide/overview/ returns HTTP 200 and its content explicitly discusses token renaming ('token name in order to make them more intuitive'), CSS Custom Properties delivery, and deprecation/removal timelines ('deprecated in v10 will remain in v11 and will be removed in v12'). Guessed sub-page URLs for color/spacing/typography-specific migration pages (e.g. /migrating/guide/color/) 404'd -- I did not find the exact per-token-category URLs, so I cannot confirm the guide's internal section structure beyond the overview page; a researcher wanting deep-linked citations should browse the site's nav rather than guess paths. Did not attempt to diff actual token VALUES (spacing scale numbers, color hex/hsl values, type scale) between the two tags -- only confirmed file/directory existence and migration-guide existence, per the scope of this preflight."
+}

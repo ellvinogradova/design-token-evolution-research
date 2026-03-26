@@ -1,0 +1,23 @@
+[
+  {
+    "system": "Carbon Design System",
+    "phase": "before",
+    "category": "contrast_safe_pairs",
+    "blind_present": false,
+    "blind_evidence": "Searched packages/themes/src/tokens.js, g10.js, g90.js, g100.js, white.js (v10.60.5). Color tokens (e.g. text01, ui01, interactive01) are defined as plain palette aliases (e.g. `export const text01 = gray100;`) with no accompanying documentation, comment, or naming that identifies specific text/surface pairs as meeting a contrast ratio (no '4.5:1', 'AA', 'contrast', or similar annotation found anywhere in the available source)."
+  },
+  {
+    "system": "Carbon Design System",
+    "phase": "after",
+    "category": "target_size",
+    "blind_present": false,
+    "blind_evidence": "Searched packages/layout/src/tokens.js and packages/themes/src/{g10,g90,g100,white}.js (v11.0.0). Only generic sizing tokens exist ('container01'-'container05', 'sizeXSmall'-'size2XLarge', 'iconSize01'-'iconSize02'); no pixel/value definitions are present in the checked-out source, and none of the tokens or surrounding code is named or documented as a minimum touch/click target size or hit-area (no 'target', 'touch', 'hit' references found)."
+  },
+  {
+    "system": "Carbon Design System",
+    "phase": "after",
+    "category": "reduced_motion",
+    "blind_present": false,
+    "blind_evidence": "Searched all files under packages/layout, packages/type, and packages/themes (v11.0.0) for 'motion', 'duration', 'easing', 'transition', 'reduced-motion', 'prefers-reduced-motion' — zero matches. No motion-related tokens or package exist in the available source tree."
+  }
+]
